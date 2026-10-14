@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:7071/api
+
+### Refresh a single repository on demand
+POST {{baseUrl}}/repositories/platform-core/refresh
+
+### Export the dependency graph as Mermaid
+GET {{baseUrl}}/dependencies/graph
+
+### Trigger the weekly sweep manually (timer functions are invoked through the admin endpoint)
+POST http://localhost:7071/admin/functions/WeeklyInventorySweepFunction
+Content-Type: application/json
+
+{}

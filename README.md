@@ -83,3 +83,13 @@ azurite
 ```
 
 Then open the repository in VS Code, select **Attach to EngineeringInsights Functions** in the Run and Debug view, and start debugging. The project builds first, starts the Azure Functions host on port `7208`, and applies EF Core migrations automatically. The SQLite database is created at `src/engineering-insights.db` and is ignored by Git.
+
+## Testing the endpoints
+
+[EngineeringInsights.WorkerApp.http](src/EngineeringInsights.WorkerApp/EngineeringInsights.WorkerApp.http) contains ready-made requests for the Function App. Install the [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension (recommended by the workspace), start the Function App, then click **Send Request** above a request in the file.
+
+| Function | Request | Purpose |
+| --- | --- | --- |
+| `WeeklyInventorySweepFunction` | Timer, Sundays at midnight (`0 0 0 * * 0`); can be fired manually through the local admin endpoint in the `.http` file | Organization-wide sweep of all repositories via the Git client, updating the database |
+| `RefreshRepositoryFunction` | `POST /api/repositories/{repositoryName}/refresh` | On-demand refresh of a single repository |
+| `ExportDependencyGraphFunction` | `GET /api/dependencies/graph` | Reads the dependencies from SQLite and returns them as a Mermaid `graph TD` text |
