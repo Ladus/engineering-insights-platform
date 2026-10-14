@@ -1,7 +1,7 @@
 using EngineeringInsights.GitRepositoryClient.Mock;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EngineeringInsights.GitRepositoryClient;
+namespace EngineeringInsights.GitRepositoryClient.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
