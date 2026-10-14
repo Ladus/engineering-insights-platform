@@ -1,13 +1,16 @@
 @baseUrl = http://localhost:7071/api
 
-### Refresh a single repository on demand
-POST {{baseUrl}}/repositories/platform-core/refresh
-
-### Export the dependency graph as Mermaid
-GET {{baseUrl}}/dependencies/graph
-
-### Trigger the weekly sweep manually (timer functions are invoked through the admin endpoint)
-POST http://localhost:7071/admin/functions/WeeklyInventorySweepFunction
+### Import all repositories (triggers the timer triggered job manually)
+POST http://localhost:7071/admin/functions/import-all-repositories-periodically
 Content-Type: application/json
 
 {}
+
+### Import a single repository on demand
+POST {{baseUrl}}/import-repository/platform-foundation
+
+### Export the dependency graph as Mermaid
+GET {{baseUrl}}/export-dependency-graph
+
+### Export the graph connected to a single package (its dependencies and dependents)
+GET {{baseUrl}}/export-dependency-graph-for-package/RB.Savings.Contracts
