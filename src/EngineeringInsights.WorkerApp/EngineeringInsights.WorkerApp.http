@@ -13,4 +13,4 @@ POST {{baseUrl}}/import-repository/platform-foundation
 GET {{baseUrl}}/export-dependency-graph
 
 ### Export the graph connected to a single package (its dependencies and dependents)
-GET {{baseUrl}}/export-dependency-graph-for-package/RB.Savings.Contracts
+GET {{baseUrl}}/export-dependency-graph-for-package/RB.Payments.Contracts
