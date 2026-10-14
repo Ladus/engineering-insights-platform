@@ -90,6 +90,7 @@ Then open the repository in VS Code, select **Attach to EngineeringInsights Func
 
 | Function | Request | Purpose |
 | --- | --- | --- |
-| `WeeklyInventorySweepFunction` | Timer, Sundays at midnight (`0 0 0 * * 0`); can be fired manually through the local admin endpoint in the `.http` file | Organization-wide sweep of all repositories via the Git client, updating the database |
-| `RefreshRepositoryFunction` | `POST /api/repositories/{repositoryName}/refresh` | On-demand refresh of a single repository |
-| `ExportDependencyGraphFunction` | `GET /api/dependencies/graph` | Reads the dependencies from SQLite and returns them as a Mermaid `graph TD` text |
+| `ImportAllRepositoriesPeriodicallyFunction` | Timer, Sundays at midnight (`0 0 0 * * 0`); can be fired manually through the local admin endpoint (`POST /admin/functions/import-all-repositories-periodically`, also in the `.http` file) | Imports all repositories via the Git client, updating the database |
+| `ImportRepositoryFunction` | `POST /api/import-repository/{repositoryName}` | On-demand import of a single repository. Returns `404` for an unknown repository |
+| `ExportDependencyGraphFunction` | `GET /api/export-dependency-graph` | Reads the dependencies from SQLite and returns them as a Mermaid `graph TD` text. Only packages published by a `.csproj` in our own repositories are included; external packages such as `Newtonsoft.Json` are left out. Arrows point from a package to the packages that use it, so shared packages end up at the top and applications at the bottom |
+| `ExportDependencyGraphForPackageFunction` | `GET /api/export-dependency-graph-for-package/{packageId}` | Same Mermaid output, limited to one package: everything it depends on and everything that depends on it, transitively. Returns `404` for a package that is not published by one of our repositories |
