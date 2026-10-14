@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/EngineeringInsights.WorkerApp/EngineeringInsights.WorkerApp.csproj",
+                "--configuration",
+                "Debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "func: host start",
+            "type": "func",
+            "command": "host start",
+            "problemMatcher": "$func-dotnet-watch",
+            "isBackground": true,
+            "dependsOn": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/src/EngineeringInsights.WorkerApp/bin/Debug/net10.0"
+            }
+        }
+    ]
+}
